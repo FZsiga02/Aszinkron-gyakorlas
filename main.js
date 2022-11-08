@@ -2,8 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let osszes = document.getElementById('osszes');
     let elerhetosegek = document.getElementById('elerhetosegek');
     let sulyos = document.getElementById('sulyos');
-    let suly = document.getElementById('suly');
+    let magassag = document.getElementById('magassag');
     let barna = document.getElementById('barna');
+    let osszsuly = document.getElementById('osszsuly');
     
 
     osszes.addEventListener('click', async () => {
@@ -16,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let response = await fetch('users.json');
         let result = await response.json();
         elerhetoseg(result.users);
+    })
+
+    sulyos.addEventListener('click', async () => {
+        let response = await fetch('users.json');
+        let result = await response.json();
+        sulyok(result.users);
     })
 
     function megjelenites(felhasznalok){
@@ -45,5 +52,15 @@ document.addEventListener('DOMContentLoaded', () => {
             td3.appendChild(document.createTextNode(f.phone));
             td3.style.border = '1px solid black';
         }
+    }
+
+    function sulyok(felhasznalok){
+        let ossz = 0;
+        for (let f of felhasznalok){
+            if(magassag.value > f.height){
+                ossz += f.weight;
+            }
+        }
+        osszsuly.appendChild(document.createTextNode(ossz + " kg"));
     }
 })
