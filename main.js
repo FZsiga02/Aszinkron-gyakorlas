@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let magassag = document.getElementById('magassag');
     let barna = document.getElementById('barna');
     let osszsuly = document.getElementById('osszsuly');
+    let osszBarna = document.getElementById('osszBarna');
     
 
     osszes.addEventListener('click', async () => {
@@ -23,6 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let response = await fetch('users.json');
         let result = await response.json();
         sulyok(result.users);
+    })
+
+    barna.addEventListener('click', async () => {
+        let response = await fetch('users.json');
+        let result = await response.json();
+        barnak(result.users);
     })
 
     function megjelenites(felhasznalok){
@@ -62,5 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         osszsuly.appendChild(document.createTextNode(ossz + " kg"));
+    }
+
+    function barnak(felhasznalok){
+        let szamlalo = 0;
+        for(let f of felhasznalok){
+            if(f.eyeColor == "Brown"){
+                szamlalo++;
+            }
+        }
+        osszBarna.appendChild(document.createTextNode(szamlalo + " db"));
     }
 })
